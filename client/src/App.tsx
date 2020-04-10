@@ -1,7 +1,8 @@
 import * as React from 'react'
 import Search from './features/search/Search'
+import { hot } from 'react-hot-loader'
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
@@ -11,4 +12,4 @@ function App() {
   )
 }
 
-export default App
+export default hot(module)(App)
