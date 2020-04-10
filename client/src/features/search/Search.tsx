@@ -1,29 +1,47 @@
 import * as React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
+import styled from '@emotion/styled'
 
-import { search } from './actions'
 import { getResults } from './selectors'
 import SearchResult from './SearchResult'
+import SearchBox from './SearchBox'
 
 const Search: React.FC = () => {
-  const dispatch = useDispatch()
   const results = useSelector(getResults)
-  const inputEl = React.useRef<HTMLInputElement>(null)
-
-  const onClick = (): void => {
-    const value = inputEl.current ? inputEl.current.value : ''
-    dispatch(search({ term: value }))
-  }
 
   return (
     <div>
-      <input ref={inputEl} type="text" />
-      <button onClick={onClick}>Search</button>
-      {results.map((result, i) => (
-        <SearchResult key={i} result={result} />
-      ))}
+      <SearchBox />
+      <SearchResultsContainer>
+        <SearchResults>
+          {results.map((result, i) => (
+            <SearchResult key={i} result={result} />
+          ))}
+        </SearchResults>
+      </SearchResultsContainer>
     </div>
   )
 }
+
+const SearchResults = styled.div`
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  column-gap: 15px;
+  row-gap: 10px;
+  max-width: 1800px;
+
+  @media (max-width: 1300px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media (max-width: 1000px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+`
+
+const SearchResultsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`
 
 export default Search

@@ -6,18 +6,18 @@ export interface SearchState {
 }
 
 export interface Result {
-  artistName: string,
-  collectionName: string,
+  artistName: string
+  collectionName: string
   artworkUrl600: string
 }
 
 export interface SearchAction {
-  type: typeof SEARCH,
+  type: typeof SEARCH
   payload: Record<string, string>
 }
 
 export interface SeachSuccessAction {
-  type: typeof SEARCH_SUCCESS,
+  type: typeof SEARCH_SUCCESS
   payload: Result[]
 }
 
