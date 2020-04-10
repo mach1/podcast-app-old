@@ -4,7 +4,10 @@ const initialState: SearchState = {
   results: []
 }
 
-const search = (state = initialState, action: SearchActionTypes): SearchState => {
+const search = (
+  state = initialState,
+  action: SearchActionTypes
+): SearchState => {
   switch (action.type) {
     case SEARCH_SUCCESS:
       return {
@@ -12,7 +15,7 @@ const search = (state = initialState, action: SearchActionTypes): SearchState =>
         results: action.payload
       }
     default:
-      return state 
+      return state
   }
 }
 

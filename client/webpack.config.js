@@ -1,47 +1,47 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin");
+const HtmlWebPackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  mode: "production",
+  mode: 'production',
 
   // Enable sourcemaps for debugging webpack's output.
-  devtool: "source-map",
+  devtool: 'source-map',
 
   resolve: {
-      // Add '.ts' and '.tsx' as resolvable extensions.
-      extensions: [".js", ".ts", ".tsx"]
+    // Add '.ts' and '.tsx' as resolvable extensions.
+    extensions: ['.js', '.ts', '.tsx']
   },
 
   module: {
-      rules: [
+    rules: [
+      {
+        test: /\.ts(x?)$/,
+        exclude: /node_modules/,
+        use: [
           {
-              test: /\.ts(x?)$/,
-              exclude: /node_modules/,
-              use: [
-                  {
-                      loader: "ts-loader"
-                  }
-              ]
-          },
-          // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-          {
-              enforce: "pre",
-              test: /\.js$/,
-              loader: "source-map-loader"
-          },
-          {
-            test: /\.html$/,
-            use: [
-              {
-                loader: "html-loader"
-              }
-            ]
+            loader: 'ts-loader'
           }
-      ]
+        ]
+      },
+      // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        loader: 'source-map-loader'
+      },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: 'html-loader'
+          }
+        ]
+      }
+    ]
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: "./src/index.html",
-      filename: "./index.html"
+      template: './src/index.html',
+      filename: './index.html'
     })
   ]
-};
+}

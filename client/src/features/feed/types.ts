@@ -1,8 +1,6 @@
 export const FETCH_FEED = 'FETCH_FEED'
 
-export interface FeedResponse {
-
-}
+export interface FeedResponse {}
 
 export interface FetchFeedAction {
   type: typeof FETCH_FEED
