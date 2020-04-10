@@ -1,6 +1,5 @@
-import React from "react"
+import * as React from 'react'
 import Search from './features/search/Search'
-import "./App.css"
 
 function App() {
   return (

@@ -7,7 +7,8 @@ export interface SearchState {
 
 export interface Result {
   artistName: string,
-  collectionName: string
+  collectionName: string,
+  artworkUrl600: string
 }
 
 export interface SearchAction {

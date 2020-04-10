@@ -1,8 +1,9 @@
-import React from 'react'
+import * as React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { search } from './actions'
 import { getResults } from './selectors'
+import SearchResult from './SearchResult'
 
 export default function Search () {
   const dispatch = useDispatch()
@@ -21,9 +22,7 @@ export default function Search () {
         Search
       </button>
       {results.map((result, i) => (
-        <div key={i}>
-          {result.collectionName} {result.artistName}
-        </div>
+        <SearchResult key={i} result={result} />
       ))}
     </div>
   )

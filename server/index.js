@@ -1,5 +1,6 @@
 import express from 'express'
 import fetch from 'node-fetch'
+import { parseStringPromise } from 'xml2js'
 
 const app = express()
 const port = 3001
@@ -22,4 +23,11 @@ app.get('/search', async function (req, res) {
   res.send(json)
 })
 
+app.get('/feed', async function (req, res) {
+  const feedString = await fetch('http://puhatajamangida.libsyn.com/rss')
+    .then(response => response.text())
+  const feed = await parseStringPromise(feedString)
+  res.setHeader('Content-Type', 'application/json');
+  res.send(feed)
+})
 app.listen(port, () => console.log(`App listening at http://localhost:${port}`))

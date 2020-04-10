@@ -22,6 +22,6 @@ function * search (action: SearchAction) {
   yield put(searchSuccess(data.results))
 }
 
-export default function * rootSaga () {
+export default function * watchSearch () {
   yield takeLatest(SEARCH, search)
 }
