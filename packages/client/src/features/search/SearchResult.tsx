@@ -1,5 +1,6 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
+import { Link } from 'react-router-dom'
 
 import { Result } from './types'
 
@@ -9,13 +10,15 @@ type Props = {
 
 const SearchResult: React.FC<Props> = ({ result }) => {
   return (
-    <Root>
-      <Image src={result.artworkUrl600} />
-      <Name>
-        <CollectionName>{result.collectionName}</CollectionName>
-        <ArtistName>{result.artistName}</ArtistName>
-      </Name>
-    </Root>
+    <Link to={`/collections/${result.collectionId}`}>
+      <Root>
+        <Image src={result.artworkUrl600} />
+        <Name>
+          <CollectionName>{result.collectionName}</CollectionName>
+          <ArtistName>{result.artistName}</ArtistName>
+        </Name>
+      </Root>
+    </Link>
   )
 }
 

@@ -19,7 +19,7 @@ function* search(action: SearchAction) {
   }
   const query = new URLSearchParams(params).toString()
   const data: SearchResponse = yield fetch(
-    `https://itunes.apple.com/search?${query}`
+    `http://localhost:8080/api/search?${query}`
   ).then((response) => response.json())
   yield put(searchSuccess(data.results))
 }
