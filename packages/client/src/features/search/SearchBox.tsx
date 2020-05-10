@@ -1,3 +1,4 @@
+import { debounce } from 'lodash'
 import * as React from 'react'
 import { useDispatch } from 'react-redux'
 import styled from '@emotion/styled'
@@ -7,16 +8,22 @@ import { search } from './actions'
 const SearchBox: React.FC = () => {
   const dispatch = useDispatch()
   const inputEl = React.useRef<HTMLInputElement>(null)
-
-  const onClick = (): void => {
+  const triggerSearch = (): void => {
     const value = inputEl.current ? inputEl.current.value : ''
+    if (!value || value.length < 2) return
     dispatch(search({ term: value }))
   }
 
+  const throttledSearch = React.useRef(debounce(triggerSearch, 300)).current
+
   return (
     <Root>
-      <SearchInput ref={inputEl} type="text" />
-      <SearchButton onClick={onClick}>Search</SearchButton>
+      <SearchInput
+        placeholder="Search"
+        ref={inputEl}
+        type="text"
+        onChange={throttledSearch}
+      />
     </Root>
   )
 }
@@ -28,16 +35,14 @@ const Root = styled.div`
 `
 
 const SearchInput = styled.input`
+  outline: none;
+  border: none;
+  box-shadow: none;
   padding: 0.375rem 0.75rem;
   font-size: 16px;
   margin-right: 10px;
   border-radius: 0.25rem;
-  border: 1px solid #ced4da;
-`
-
-const SearchButton = styled.button`
-  border-radius: 0.3rem;
-  font-size: 18px;
+  border-bottom: 1px solid #ced4da;
 `
 
 export default SearchBox

@@ -10,38 +10,47 @@ type Props = {
 
 const SearchResult: React.FC<Props> = ({ result }) => {
   return (
-    <Link to={`/feed/${result.collectionId}`}>
-      <Root>
-        <Image src={result.artworkUrl600} />
-        <Name>
-          <CollectionName>{result.collectionName}</CollectionName>
-          <ArtistName>{result.artistName}</ArtistName>
-        </Name>
-      </Root>
-    </Link>
+    <Root to={`/feed/${result.collectionId}`}>
+      <Image src={result.artworkUrl600} />
+      <CollectionName>{result.collectionName}</CollectionName>
+      <ArtistName>{result.artistName}</ArtistName>
+      <Divider />
+    </Root>
   )
 }
 
-const Root = styled.div`
+const Root = styled(Link)`
   display: flex;
   flex-direction: column;
+  text-decoration: none;
+  margin-top: 30px;
 `
 
 const Image = styled.img`
-  width: 100%;
-`
-
-const Name = styled.div`
-  margin-top: 10px;
+  height: 200px;
+  width: 200px;
 `
 
 const CollectionName = styled.div`
   font-weight: bold;
   font-size: 16px;
+  font-family: 'Oswald', sans-serif;
+  color: #0d1821;
+  margin-top: 10px;
 `
 
 const ArtistName = styled.div`
+  margin-top: 10px;
   font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+  color: #153b50;
+`
+
+const Divider = styled.div`
+  height: 2px;
+  width: 100%;
+  margin-top: 10px;
+  background: #4e3d42;
 `
 
 export default SearchResult

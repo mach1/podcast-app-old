@@ -10,38 +10,43 @@ const Search: React.FC = () => {
   const results = useSelector(getResults)
 
   return (
-    <div>
-      <SearchBox />
-      <SearchResultsContainer>
-        <SearchResults>
-          {results.map((result, i) => (
-            <SearchResult key={i} result={result} />
-          ))}
-        </SearchResults>
-      </SearchResultsContainer>
-    </div>
+    <Container>
+      <Header>
+        <Title>Podcasts</Title>
+        <SearchBox />
+      </Header>
+      <Content>
+        {results.map((result, i) => (
+          <SearchResult key={i} result={result} />
+        ))}
+      </Content>
+    </Container>
   )
 }
 
-const SearchResults = styled.div`
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  column-gap: 15px;
-  row-gap: 10px;
-  max-width: 1800px;
-
-  @media (max-width: 1300px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  @media (max-width: 1000px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
+const Title = styled.div`
+  font-family: 'Oswald', sans-serif;
+  font-weight: bold;
+  font-size: 28px;
+  color: #ff206e;
 `
 
-const SearchResultsContainer = styled.div`
+const Container = styled.div`
+  max-width: 960px;
+  margin: 0 auto;
+`
+
+const Header = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  margin-top: 20px;
+`
+
+const Content = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 20px;
+  row-gap: 30px;
 `
 
 export default Search

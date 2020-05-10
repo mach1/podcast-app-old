@@ -1,4 +1,4 @@
-import { takeLatest, put, call } from 'redux-saga/effects'
+import { takeEvery, put, call } from 'redux-saga/effects'
 import { SagaIterator } from '@redux-saga/core'
 
 import http from '../../common/api'
@@ -26,7 +26,7 @@ function* search(action: SearchAction): SagaIterator {
 }
 
 export function* watchSearch(): SagaIterator {
-  yield takeLatest(SEARCH, search)
+  yield takeEvery(SEARCH, search)
 }
 
 function* lookUp(action: SearchAction): SagaIterator {
@@ -41,5 +41,5 @@ function* lookUp(action: SearchAction): SagaIterator {
 }
 
 export function* watchLookUp(): SagaIterator {
-  yield takeLatest(LOOK_UP, lookUp)
+  yield takeEvery(LOOK_UP, lookUp)
 }

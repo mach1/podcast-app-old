@@ -1,4 +1,5 @@
 import {
+  SEARCH,
   SEARCH_SUCCESS,
   LOOK_UP_SUCCESS,
   SearchActionTypes,
@@ -14,6 +15,11 @@ const search = (
   action: SearchActionTypes
 ): SearchState => {
   switch (action.type) {
+    case SEARCH:
+      return {
+        ...state,
+        results: []
+      }
     case SEARCH_SUCCESS:
       return {
         ...state,
