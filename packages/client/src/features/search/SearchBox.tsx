@@ -43,6 +43,7 @@ const SearchInput = styled.input`
   margin-right: 10px;
   border-radius: 0.25rem;
   border-bottom: 1px solid #ced4da;
+  background: transparent;
 `
 
 export default SearchBox

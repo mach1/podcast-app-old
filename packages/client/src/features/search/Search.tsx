@@ -10,19 +10,27 @@ const Search: React.FC = () => {
   const results = useSelector(getResults)
 
   return (
-    <Container>
-      <Header>
-        <Title>Podcasts</Title>
-        <SearchBox />
-      </Header>
-      <Content>
-        {results.map((result, i) => (
-          <SearchResult key={i} result={result} />
-        ))}
-      </Content>
-    </Container>
+    <Root>
+      <Container>
+        <Header>
+          <Title>Podcasts</Title>
+          <SearchBox />
+        </Header>
+        <Content>
+          {results.map((result, i) => (
+            <SearchResult key={i} result={result} />
+          ))}
+        </Content>
+      </Container>
+    </Root>
   )
 }
+
+const Root = styled.div`
+  padding: 60px 0;
+  background: #f2fdff;
+  min-height: 100vh;
+`
 
 const Title = styled.div`
   font-family: 'Oswald', sans-serif;

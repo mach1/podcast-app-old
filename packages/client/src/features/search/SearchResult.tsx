@@ -37,6 +37,10 @@ const CollectionName = styled.div`
   font-family: 'Oswald', sans-serif;
   color: #0d1821;
   margin-top: 10px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 450px;
 `
 
 const ArtistName = styled.div`

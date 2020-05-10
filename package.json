@@ -50,6 +50,7 @@
     "@types/redux-saga": "^0.10.5",
     "@types/reselect": "^2.2.0",
     "@types/xml2js": "^0.4.5",
+    "css-loader": "^3.5.3",
     "express": "^4.17.1",
     "lodash": "^4.17.15",
     "node-fetch": "^2.6.0",
