@@ -3,15 +3,23 @@ import { useSelector, useDispatch } from 'react-redux'
 import styled from '@emotion/styled'
 import { useParams } from 'react-router'
 
+import Loading from '../../common/Loading'
 import { fetchFeed } from './actions'
+import { getFeedById } from './selectors'
 import { getResults } from '../search/selectors'
+import FeedItem from './FeedItem'
+
+import { RootState } from '../../app/rootReducer'
+import type { FeedItem as FeedItemType } from './types'
 
 const Collection: React.FC = () => {
   const dispatch = useDispatch()
   const { id = '' } = useParams()
   const results = useSelector(getResults)
+  const feedItems = useSelector((state: RootState) =>
+    getFeedById(state, { id: +id })
+  )
   const collection = results.find((result) => result.collectionId === +id)
-  console.log(collection)
 
   React.useEffect(() => {
     if (collection) {
@@ -19,10 +27,13 @@ const Collection: React.FC = () => {
     }
   }, [])
 
+  if (!feedItems) return <Loading />
+
   return (
     <Root>
-      detailed
-      {id}
+      {feedItems.map((feedItem: FeedItemType, i) => (
+        <FeedItem key={i} item={feedItem} />
+      ))}
     </Root>
   )
 }
