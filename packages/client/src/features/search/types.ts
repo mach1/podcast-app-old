@@ -10,6 +10,7 @@ export interface Result {
   collectionId: number
   collectionName: string
   artworkUrl600: string
+  feedUrl: string
 }
 
 export interface SearchAction {
