@@ -3,14 +3,14 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { hot } from 'react-hot-loader'
 
 import Search from './features/search/Search'
-import Collection from './features/feed/Collection'
+import Feed from './features/feed/Feed'
 
 const App: React.FC = () => {
   return (
     <Router basename="/app">
       <Switch>
-        <Route path="/collections/:id">
-          <Collection />
+        <Route path="/feed/:id">
+          <Feed />
         </Route>
         <Route path="/">
           <Search />

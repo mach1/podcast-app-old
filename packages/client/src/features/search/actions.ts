@@ -1,4 +1,11 @@
-import { Result, SEARCH, SEARCH_SUCCESS, SearchActionTypes } from './types'
+import {
+  Result,
+  SEARCH,
+  SEARCH_SUCCESS,
+  LOOK_UP,
+  LOOK_UP_SUCCESS,
+  SearchActionTypes
+} from './types'
 
 export const search = (params: Record<string, string>): SearchActionTypes => ({
   type: SEARCH,
@@ -7,5 +14,15 @@ export const search = (params: Record<string, string>): SearchActionTypes => ({
 
 export const searchSuccess = (results: Result[]): SearchActionTypes => ({
   type: SEARCH_SUCCESS,
+  payload: results
+})
+
+export const lookUp = (params: Record<string, string>): SearchActionTypes => ({
+  type: LOOK_UP,
+  payload: params
+})
+
+export const lookUpSuccess = (results: Result[]): SearchActionTypes => ({
+  type: LOOK_UP_SUCCESS,
   payload: results
 })

@@ -1,9 +1,11 @@
-import { takeLatest, put } from 'redux-saga/effects'
+import { takeLatest, put, call } from 'redux-saga/effects'
+import { SagaIterator } from '@redux-saga/core'
 
+import http from '../../common/api'
 import { FETCH_FEED, FeedResponse, FetchFeedAction } from './types'
 import { fetchFeedSuccess } from './actions'
 
-function* fetchFeed(action: FetchFeedAction) {
+function* fetchFeed(action: FetchFeedAction): SagaIterator {
   const {
     payload: { id, url }
   } = action
@@ -12,13 +14,11 @@ function* fetchFeed(action: FetchFeedAction) {
   }
   const query = new URLSearchParams(params).toString()
 
-  const data: FeedResponse = yield fetch(
-    `http://localhost:8080/api/feed?${query}`
-  ).then((response) => response.json())
-  console.log(data)
+  const response = yield call(http, `http://localhost:8080/api/feed?${query}`)
+  const data: FeedResponse = response.parsedBody
   yield put(fetchFeedSuccess(id, data))
 }
 
-export default function* watchFetchFeed() {
+export function* watchFetchFeed(): SagaIterator {
   yield takeLatest(FETCH_FEED, fetchFeed)
 }

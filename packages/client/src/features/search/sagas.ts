@@ -1,7 +1,9 @@
-import { takeLatest, put } from 'redux-saga/effects'
+import { takeLatest, put, call } from 'redux-saga/effects'
+import { SagaIterator } from '@redux-saga/core'
 
-import { searchSuccess } from './actions'
-import { Result, SEARCH, SearchAction } from './types'
+import http from '../../common/api'
+import { searchSuccess, lookUpSuccess } from './actions'
+import { Result, SEARCH, LOOK_UP, SearchAction } from './types'
 
 interface SearchResponse {
   resultCount: number
@@ -12,18 +14,32 @@ const DEFAULT_PARAMS = {
   media: 'podcast'
 }
 
-function* search(action: SearchAction) {
+function* search(action: SearchAction): SagaIterator {
   const params = {
     ...DEFAULT_PARAMS,
     ...action.payload
   }
   const query = new URLSearchParams(params).toString()
-  const data: SearchResponse = yield fetch(
-    `http://localhost:8080/api/search?${query}`
-  ).then((response) => response.json())
+  const response = yield call(http, `http://localhost:8080/api/search?${query}`)
+  const data: SearchResponse = response.parsedBody
   yield put(searchSuccess(data.results))
 }
 
-export default function* watchSearch() {
+export function* watchSearch(): SagaIterator {
   yield takeLatest(SEARCH, search)
+}
+
+function* lookUp(action: SearchAction): SagaIterator {
+  const params = {
+    ...DEFAULT_PARAMS,
+    ...action.payload
+  }
+  const query = new URLSearchParams(params).toString()
+  const response = yield call(http, `http://localhost:8080/api/lookup?${query}`)
+  const data: SearchResponse = response.parsedBody
+  yield put(lookUpSuccess(data.results))
+}
+
+export function* watchLookUp(): SagaIterator {
+  yield takeLatest(LOOK_UP, lookUp)
 }

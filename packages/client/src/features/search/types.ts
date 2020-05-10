@@ -1,5 +1,7 @@
 export const SEARCH = 'SEARCH'
 export const SEARCH_SUCCESS = 'SEARCH_SUCCESS'
+export const LOOK_UP = 'LOOK_UP'
+export const LOOK_UP_SUCCESS = 'LOOK_UP_SUCCESS'
 
 export interface SearchState {
   results: Result[]
@@ -23,4 +25,18 @@ export interface SeachSuccessAction {
   payload: Result[]
 }
 
-export type SearchActionTypes = SearchAction | SeachSuccessAction
+export interface LookUpAction {
+  type: typeof LOOK_UP
+  payload: Record<string, string>
+}
+
+export interface LookUpSuccessAction {
+  type: typeof LOOK_UP_SUCCESS
+  payload: Result[]
+}
+
+export type SearchActionTypes =
+  | SearchAction
+  | SeachSuccessAction
+  | LookUpAction
+  | LookUpSuccessAction

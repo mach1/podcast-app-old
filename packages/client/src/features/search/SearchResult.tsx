@@ -10,7 +10,7 @@ type Props = {
 
 const SearchResult: React.FC<Props> = ({ result }) => {
   return (
-    <Link to={`/collections/${result.collectionId}`}>
+    <Link to={`/feed/${result.collectionId}`}>
       <Root>
         <Image src={result.artworkUrl600} />
         <Name>

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import styled from '@emotion/styled'
 import { useParams } from 'react-router'
 
+import { lookUp } from '../search/actions'
 import Loading from '../../common/Loading'
 import { fetchFeed } from './actions'
 import { getFeedById } from './selectors'
@@ -12,7 +13,7 @@ import FeedItem from './FeedItem'
 import { RootState } from '../../app/rootReducer'
 import type { FeedItem as FeedItemType } from './types'
 
-const Collection: React.FC = () => {
+const Feed: React.FC = () => {
   const dispatch = useDispatch()
   const { id = '' } = useParams()
   const results = useSelector(getResults)
@@ -24,8 +25,10 @@ const Collection: React.FC = () => {
   React.useEffect(() => {
     if (collection) {
       dispatch(fetchFeed(collection.collectionId, collection.feedUrl))
+    } else {
+      dispatch(lookUp({ id }))
     }
-  }, [])
+  }, [collection])
 
   if (!feedItems) return <Loading />
 
@@ -40,4 +43,4 @@ const Collection: React.FC = () => {
 
 const Root = styled.div``
 
-export default Collection
+export default Feed

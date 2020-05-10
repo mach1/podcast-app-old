@@ -22,6 +22,14 @@ app.get('/api/search', async function (req, res) {
   res.send(json)
 })
 
+app.get('/api/lookup', async function (req, res) {
+  const query = new URLSearchParams(req.query).toString()
+  const response = await fetch(`https://itunes.apple.com/lookup?${query}`)
+  const json = await response.json()
+  res.setHeader('Content-Type', 'application/json')
+  res.send(json)
+})
+
 app.get('/api/feed', async function (req, res) {
   const url = req.query.url
   const response = await fetch(url)
