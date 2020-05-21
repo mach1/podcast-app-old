@@ -4,6 +4,7 @@ import { SagaIterator } from '@redux-saga/core'
 import http from '../../common/api'
 import { searchSuccess, lookUpSuccess } from './actions'
 import { Result, SEARCH, LOOK_UP, SearchAction } from './types'
+import { fetchFeed } from '../feed/actions'
 
 interface SearchResponse {
   resultCount: number
@@ -37,7 +38,14 @@ function* lookUp(action: SearchAction): SagaIterator {
   const query = new URLSearchParams(params).toString()
   const response = yield call(http, `http://localhost:8080/api/lookup?${query}`)
   const data: SearchResponse = response.parsedBody
+  const collection = data.results.find(
+    ({ collectionId }) => collectionId === +params.id
+  )
   yield put(lookUpSuccess(data.results))
+
+  if (collection) {
+    yield put(fetchFeed(collection.collectionId, collection.feedUrl))
+  }
 }
 
 export function* watchLookUp(): SagaIterator {

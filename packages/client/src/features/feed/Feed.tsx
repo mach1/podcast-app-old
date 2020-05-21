@@ -32,7 +32,7 @@ const Feed: React.FC = () => {
     } else {
       dispatch(lookUp({ id }))
     }
-  }, [collection])
+  }, [])
 
   if (!feed) return <Loading />
 

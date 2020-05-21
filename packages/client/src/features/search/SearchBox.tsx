@@ -4,14 +4,20 @@ import { useDispatch } from 'react-redux'
 import styled from '@emotion/styled'
 
 import { search } from './actions'
+import { useHistory, useLocation } from 'react-router-dom'
 
 const SearchBox: React.FC = () => {
   const dispatch = useDispatch()
+  const history = useHistory()
+  const location = useLocation()
   const inputEl = React.useRef<HTMLInputElement>(null)
   const triggerSearch = (): void => {
     const value = inputEl.current ? inputEl.current.value : ''
     if (!value || value.length < 2) return
     dispatch(search({ term: value }))
+    if (location.pathname !== '/') {
+      history.push('/')
+    }
   }
 
   const throttledSearch = React.useRef(debounce(triggerSearch, 300)).current

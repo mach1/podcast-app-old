@@ -7,6 +7,10 @@ export interface SearchState {
   results: Result[]
 }
 
+export interface LookUpParams {
+  id: number
+}
+
 export interface Result {
   artistName: string
   collectionId: number
@@ -27,7 +31,7 @@ export interface SeachSuccessAction {
 
 export interface LookUpAction {
   type: typeof LOOK_UP
-  payload: Record<string, string>
+  payload: LookUpParams
 }
 
 export interface LookUpSuccessAction {

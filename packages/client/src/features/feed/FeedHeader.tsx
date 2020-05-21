@@ -13,14 +13,15 @@ interface Props {
 }
 
 const FeedHeader: React.FC<Props> = ({ meta }) => {
-  console.log(meta)
   return (
     <Root>
       <Image src={meta.image} />
       <RightContent>
         <Title>{meta.title}</Title>
         <Author>{meta.author}</Author>
-        <Subtitle>{meta.description}</Subtitle>
+        <Subtitle
+          dangerouslySetInnerHTML={{ __html: meta.description }}
+        ></Subtitle>
       </RightContent>
     </Root>
   )
