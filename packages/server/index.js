@@ -37,16 +37,29 @@ app.get('/api/feed', async function (req, res) {
   const parser = new xml2js.Parser()
   const feed = await parser.parseStringPromise(text)
 
-  const cleanFeed = feed.rss.channel[0].item
+  const feedChannel = feed.rss.channel[0]
+  const items = feedChannel.item
     .filter(({ enclosure }) => enclosure)
     .map((feedItem) => {
       const enclosure = feedItem.enclosure[0]['$']
       return {
         title: feedItem.title[0],
         link: feedItem.link[0],
+        description: feedItem.description[0],
+        date: feedItem.pubDate[0],
         enclosure
       }
     })
+  const meta = {
+    title: feedChannel.title[0],
+    description: feedChannel.description[0],
+    image: feedChannel.image[0].url[0],
+    author: feedChannel['itunes:author'][0]
+  }
+  const cleanFeed = {
+    meta,
+    items
+  }
 
   res.setHeader('Content-Type', 'application/json')
   res.send(cleanFeed)

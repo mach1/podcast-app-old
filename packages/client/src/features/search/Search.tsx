@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { useSelector } from 'react-redux'
-import styled from '@emotion/styled'
+
+import { Page, Container, Header, Content } from '../../styles/components'
+import { PageTitle } from '../../styles/text'
 
 import { getResults } from './selectors'
 import SearchResult from './SearchResult'
@@ -10,10 +12,10 @@ const Search: React.FC = () => {
   const results = useSelector(getResults)
 
   return (
-    <Root>
+    <Page>
       <Container>
         <Header>
-          <Title>Podcasts</Title>
+          <PageTitle>Podcasts</PageTitle>
           <SearchBox />
         </Header>
         <Content>
@@ -22,39 +24,8 @@ const Search: React.FC = () => {
           ))}
         </Content>
       </Container>
-    </Root>
+    </Page>
   )
 }
-
-const Root = styled.div`
-  padding: 60px 0;
-  background: #f2fdff;
-  min-height: 100vh;
-`
-
-const Title = styled.div`
-  font-family: 'Oswald', sans-serif;
-  font-weight: bold;
-  font-size: 28px;
-  color: #ff206e;
-`
-
-const Container = styled.div`
-  max-width: 960px;
-  margin: 0 auto;
-`
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-`
-
-const Content = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: 20px;
-  row-gap: 30px;
-`
 
 export default Search

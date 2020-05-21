@@ -2,6 +2,8 @@ import * as React from 'react'
 import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
 
+import { Divider } from '../../styles/components'
+import { ItemSubtitle, ItemTitle } from '../../styles/text'
 import { Result } from './types'
 
 type Props = {
@@ -31,11 +33,7 @@ const Image = styled.img`
   width: 200px;
 `
 
-const CollectionName = styled.div`
-  font-weight: bold;
-  font-size: 16px;
-  font-family: 'Oswald', sans-serif;
-  color: #0d1821;
+const CollectionName = styled(ItemTitle)`
   margin-top: 10px;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -43,18 +41,8 @@ const CollectionName = styled.div`
   max-width: 450px;
 `
 
-const ArtistName = styled.div`
+const ArtistName = styled(ItemSubtitle)`
   margin-top: 10px;
-  font-size: 14px;
-  font-family: 'Montserrat', sans-serif;
-  color: #153b50;
-`
-
-const Divider = styled.div`
-  height: 2px;
-  width: 100%;
-  margin-top: 10px;
-  background: #4e3d42;
 `
 
 export default SearchResult
