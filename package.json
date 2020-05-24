@@ -6,14 +6,14 @@
   "type": "module",
   "scripts": {
     "dev-client": "NODE_ENV=development webpack-dev-server --config webpack.config.cjs --hot --open --mode development --port 3000",
-    "build": "webpack --mode production --config webpack.config.cjs",
+    "build": "webpack --mode production --config webpack.config.cjs && npx babel packages/server/index.js -d dist",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev-server": "nodemon packages/server/index.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.9.0",
+    "@babel/core": "^7.9.6",
     "@babel/node": "^7.8.7",
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-react": "^7.9.4",
@@ -41,6 +41,7 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
+    "@babel/cli": "^7.8.4",
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
     "@hot-loader/react-dom": "^16.13.0",
