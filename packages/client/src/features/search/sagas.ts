@@ -1,7 +1,7 @@
 import { takeEvery, put, call } from 'redux-saga/effects'
 import { SagaIterator } from '@redux-saga/core'
 
-import http from '../../common/api'
+import http, { HOST } from '../../common/api'
 import { searchSuccess, lookUpSuccess } from './actions'
 import { Result, SEARCH, LOOK_UP, SearchAction, LookUpAction } from './types'
 import { fetchFeed } from '../feed/actions'
@@ -21,7 +21,7 @@ function* search(action: SearchAction): SagaIterator {
     ...action.payload
   }
   const query = new URLSearchParams(params).toString()
-  const response = yield call(http, `http://localhost:8080/api/search?${query}`)
+  const response = yield call(http, `${HOST}/api/search?${query}`)
   const data: SearchResponse = response.parsedBody
   yield put(searchSuccess(data.results))
 }
@@ -36,7 +36,7 @@ function* lookUp(action: LookUpAction): SagaIterator {
     id: '' + action.payload.id
   }
   const query = new URLSearchParams(params).toString()
-  const response = yield call(http, `http://localhost:8080/api/lookup?${query}`)
+  const response = yield call(http, `${HOST}/api/lookup?${query}`)
   const data: SearchResponse = response.parsedBody
   const collection = data.results.find(
     ({ collectionId }) => collectionId === +params.id

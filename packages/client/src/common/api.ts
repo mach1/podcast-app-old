@@ -17,3 +17,6 @@ export default async function http<T>(
   }
   return response
 }
+
+export const HOST =
+  process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : ''
