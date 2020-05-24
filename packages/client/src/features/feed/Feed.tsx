@@ -30,7 +30,7 @@ const Feed: React.FC = () => {
     if (collection) {
       dispatch(fetchFeed(collection.collectionId, collection.feedUrl))
     } else {
-      dispatch(lookUp({ id }))
+      dispatch(lookUp({ id: +id }))
     }
   }, [])
 

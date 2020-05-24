@@ -7,6 +7,10 @@ export interface SearchState {
   results: Result[]
 }
 
+export interface SearchParams {
+  term: string
+}
+
 export interface LookUpParams {
   id: number
 }
@@ -21,7 +25,7 @@ export interface Result {
 
 export interface SearchAction {
   type: typeof SEARCH
-  payload: Record<string, string>
+  payload: SearchParams
 }
 
 export interface SeachSuccessAction {

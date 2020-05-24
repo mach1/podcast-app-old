@@ -3,7 +3,7 @@ import { SagaIterator } from '@redux-saga/core'
 
 import http from '../../common/api'
 import { searchSuccess, lookUpSuccess } from './actions'
-import { Result, SEARCH, LOOK_UP, SearchAction } from './types'
+import { Result, SEARCH, LOOK_UP, SearchAction, LookUpAction } from './types'
 import { fetchFeed } from '../feed/actions'
 
 interface SearchResponse {
@@ -30,10 +30,10 @@ export function* watchSearch(): SagaIterator {
   yield takeEvery(SEARCH, search)
 }
 
-function* lookUp(action: SearchAction): SagaIterator {
+function* lookUp(action: LookUpAction): SagaIterator {
   const params = {
     ...DEFAULT_PARAMS,
-    ...action.payload
+    id: '' + action.payload.id
   }
   const query = new URLSearchParams(params).toString()
   const response = yield call(http, `http://localhost:8080/api/lookup?${query}`)

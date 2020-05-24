@@ -5,10 +5,11 @@ import {
   LOOK_UP,
   LOOK_UP_SUCCESS,
   SearchActionTypes,
+  SearchParams,
   LookUpParams
 } from './types'
 
-export const search = (params: Record<string, string>): SearchActionTypes => ({
+export const search = (params: SearchParams): SearchActionTypes => ({
   type: SEARCH,
   payload: params
 })
