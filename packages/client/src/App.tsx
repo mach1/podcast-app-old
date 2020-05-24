@@ -5,6 +5,7 @@ import { hot } from 'react-hot-loader'
 
 import Search from './features/search/Search'
 import Feed from './features/feed/Feed'
+import Player from './features/player/Player'
 
 const App: React.FC = () => {
   return (
@@ -31,6 +32,7 @@ const App: React.FC = () => {
           </Route>
         </Switch>
       </Router>
+      <Player />
     </React.Fragment>
   )
 }

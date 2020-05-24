@@ -16,6 +16,9 @@ export interface FeedItem {
   link: string
   description: string
   date: string
+  enclosure: {
+    url: string
+  }
 }
 
 export interface FeedState {
