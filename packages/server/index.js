@@ -1,6 +1,6 @@
-import express from 'express'
-import fetch from 'node-fetch'
-import xml2js from 'xml2js'
+const express = require('express')
+const fetch = require('node-fetch')
+const xml2js = require('xml2js')
 
 const app = express()
 const port = 8080
